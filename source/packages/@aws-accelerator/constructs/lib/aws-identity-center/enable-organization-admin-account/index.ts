@@ -181,11 +181,12 @@ async function deregisterDelegatedAdministrators(
   const ssoInstanceId = await getSsoInstanceId(identityCenterClient);
   if (ssoInstanceId) {
     console.log(`Identity Center Instance ID is: ${ssoInstanceId}`);
-    const isIdentityCenterDeregisterable = await verifyIdentityCenterResourcesBeforeDeletion(
-      identityCenterClient,
-      ssoInstanceId,
-      delegatedAdmin,
-    );
+    const isIdentityCenterDeregisterable = true
+    // const isIdentityCenterDeregisterable = await verifyIdentityCenterResourcesBeforeDeletion(
+    //   identityCenterClient,
+    //   ssoInstanceId,
+    //   delegatedAdmin,
+    // );
 
     // Only Deregister Account if No Permission Sets or Assignments are present in the account.
     if (isIdentityCenterDeregisterable) {

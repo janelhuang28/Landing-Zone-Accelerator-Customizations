@@ -98,11 +98,7 @@ export class OperationsStack extends AcceleratorStack {
 
     // Security Services delegated admin account configuration
     // Global decoration for security services
-    var securityAdminAccount = props.securityConfig.centralSecurityServices.delegatedAdminAccount;
-    if (!securityAdminAccount) {
-      // If the delegated admin account is not defined in the security config, use the one in the iam config
-      securityAdminAccount = props.iamConfig.identityCenter?.delegatedAdminAccount
-    }
+    const securityAdminAccount = props.securityConfig.centralSecurityServices.delegatedAdminAccount;
     const securityAdminAccountId = props.accountsConfig.getAccountId(securityAdminAccount);
 
     //
@@ -815,6 +811,11 @@ export class OperationsStack extends AcceleratorStack {
 
   private addIdentityCenterResources(securityAdminAccountId: string) {
     if (this.props.iamConfig.identityCenter) {
+      const identityCenterDelgatedAdminOverrideId = this.props.iamConfig.identityCenter?.delegatedAdminAccount;
+      if (identityCenterDelgatedAdminOverrideId) {
+        securityAdminAccountId = this.props.accountsConfig.getAccountId(identityCenterDelgatedAdminOverrideId);
+      }
+      this.logger.info(`Delegated Admin account for Identity Center is: ${securityAdminAccountId}`);
       if (cdk.Stack.of(this).account == securityAdminAccountId) {
         const identityCenterInstanceId = this.getIdentityCenterInstanceId(securityAdminAccountId);
         if (!identityCenterInstanceId) {

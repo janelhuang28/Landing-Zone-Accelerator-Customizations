@@ -760,7 +760,7 @@ export class OperationsStack extends AcceleratorStack {
     if (!securityAdminAccountId) {
       securityAdminAccountId = this.props.accountsConfig.getManagementAccountId();
     }
-    if (cdk.Stack.of(this).account == securityAdminAccountId) {
+    if (cdk.Stack.of(this).account == this.props.accountsConfig.getManagementAccountId()) {
       try {
         identityCenterInstanceResponse = new IdentityCenterGetInstanceId(this, `IdentityCenterGetInstanceId`);
         identityCenterInstanceId = identityCenterInstanceResponse.instanceId;

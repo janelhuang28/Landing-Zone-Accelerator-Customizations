@@ -66,7 +66,11 @@ export class OrganizationsStack extends AcceleratorStack {
 
     // Security Services delegated admin account configuration
     // Global decoration for security services
-    const delegatedAdminAccount = props.securityConfig.centralSecurityServices.delegatedAdminAccount;
+    var delegatedAdminAccount = props.securityConfig.centralSecurityServices.delegatedAdminAccount;
+    if (!delegatedAdminAccount) {
+      // If the delegated admin account is not defined in the security config, use the one in the iam config
+      delegatedAdminAccount = props.iamConfig.identityCenterConfig.delegatedAdminAccount
+    }
     const securityAdminAccountId = props.accountsConfig.getAccountId(delegatedAdminAccount);
 
     this.logger.debug(`homeRegion: ${props.globalConfig.homeRegion}`);

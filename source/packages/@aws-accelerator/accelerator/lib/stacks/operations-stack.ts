@@ -101,7 +101,7 @@ export class OperationsStack extends AcceleratorStack {
     var securityAdminAccount = props.securityConfig.centralSecurityServices.delegatedAdminAccount;
     if (!securityAdminAccount) {
       // If the delegated admin account is not defined in the security config, use the one in the iam config
-      securityAdminAccount = props.iamConfig.identityCenterConfig.delegatedAdminAccount
+      securityAdminAccount = props.iamConfig.identityCenter.delegatedAdminAccount
     }
     const securityAdminAccountId = props.accountsConfig.getAccountId(securityAdminAccount);
 

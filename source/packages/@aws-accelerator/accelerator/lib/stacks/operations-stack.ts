@@ -760,6 +760,7 @@ export class OperationsStack extends AcceleratorStack {
     if (!securityAdminAccountId) {
       securityAdminAccountId = this.props.accountsConfig.getManagementAccountId();
     }
+    this.logger.info(`Delegated Admin account for Identity Center is: ${securityAdminAccountId}`)
     if (cdk.Stack.of(this).account == this.props.accountsConfig.getManagementAccountId()) {
       try {
         identityCenterInstanceResponse = new IdentityCenterGetInstanceId(this, `IdentityCenterGetInstanceId`);
